@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="gathering-api" />
+        <module name="gateway-api" />
       </profile>
       <profile name="Annotation profile for gathering-root" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -18,6 +19,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.1.Final/mapstruct-processor-1.5.1.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.1.Final/mapstruct-1.5.1.Final.jar" />
         </processorPath>
+        <module name="gateway-server" />
         <module name="gathering-server" />
       </profile>
     </annotationProcessing>
@@ -29,6 +31,9 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="event-service" options="-parameters" />
+      <module name="gateway" options="" />
+      <module name="gateway-api" options="-parameters" />
+      <module name="gateway-server" options="-parameters" />
       <module name="gathering-api" options="-parameters" />
       <module name="gathering-server" options="-parameters" />
       <module name="server" options="-parameters" />
