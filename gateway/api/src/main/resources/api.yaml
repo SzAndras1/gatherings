@@ -7,7 +7,7 @@ info:
   title: Microservice
 
 servers:
-  - url: http://gateway:8082
+  - url: http://localhost:8082
 
 paths:
 
