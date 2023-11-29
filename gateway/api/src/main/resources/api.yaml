@@ -1,0 +1,75 @@
+# API Template to extend when a service is created based on this archetype.
+# Do not create a new .yaml file next to this, rather use this as the main descriptor.
+
+openapi: "3.0.3"
+info:
+  version: 1.0.0
+  title: Microservice
+
+servers:
+  - url: http://gateway:8082
+
+paths:
+
+  # ==============================================================================
+  # Gathering
+  # ==============================================================================
+
+  /api/v1/gatherings:
+    get:
+      tags:
+        - gathering
+      operationId: getGatherings
+      description: Get every gathering
+      responses:
+        200:
+          description: List of gatherings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'gathering/api.yaml#/components/schemas/GatheringDto'
+    post:
+      tags:
+        - gathering
+      operationId: createGathering
+      description: Create a Gathering
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: 'gathering/api.yaml#/components/schemas/GatheringDto'
+        description: Content of the Gathering
+        required: true
+      responses:
+        201:
+          description: The created Gathering
+          content:
+            application/json:
+              schema:
+                $ref: 'gathering/api.yaml#/components/schemas/GatheringDto'
+
+  /api/v1/gatherings/{ownerId}:
+    get:
+      tags:
+        - gathering
+      operationId: getGatheringsByOwnerId
+      description: Get every gathering by specified ownerId
+      parameters:
+        - name: ownerId
+          in: path
+          required: true
+          description: Id of the owner
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: List of gatherings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'gathering/api.yaml#/components/schemas/GatheringDto'
