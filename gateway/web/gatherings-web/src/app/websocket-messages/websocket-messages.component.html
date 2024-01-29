@@ -1,0 +1,31 @@
+<h1>Angular Websocket-Socket.IO Client Demo</h1>
+
+<div>
+  <input type="text" [(ngModel)]="senderName" placeholder="Username">
+</div>
+<div>
+  <input type="text" [(ngModel)]="group" placeholder="Group name">
+</div>
+<div>
+  <button (click)="getReceivedMessages()">Received messages console log</button>
+  <input [(ngModel)]="text" (change)="sendMessage()" placeholder="Type a message"/>
+  <button (click)="sendMessage()">Send</button>
+</div>
+<h2>Group 1</h2>
+<div>
+  <h2>Received Messages:</h2>
+  <div *ngFor="let receivedMessage of receivedMessages">{{ receivedMessage }}
+  </div>
+  <h2>Sent messages:</h2>
+  <div *ngFor="let sentMessage of sentMessages">{{ sentMessage }}
+  </div>
+</div>
+<h2>Group 2</h2>
+<div>
+  <h2>Received Messages:</h2>
+  <div *ngFor="let receivedMessage of receivedMessages2">{{ receivedMessage }}
+  </div>
+  <h2>Sent messages:</h2>
+  <div *ngFor="let sentMessage of sentMessages2">{{ sentMessage }}
+  </div>
+</div>
