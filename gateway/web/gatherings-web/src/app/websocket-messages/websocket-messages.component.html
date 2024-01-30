@@ -4,28 +4,33 @@
   <input type="text" [(ngModel)]="senderName" placeholder="Username">
 </div>
 <div>
-  <input type="text" [(ngModel)]="group" placeholder="Group name">
-</div>
-<div>
-  <button (click)="getReceivedMessages()">Received messages console log</button>
   <input [(ngModel)]="text" (change)="sendMessage()" placeholder="Type a message"/>
   <button (click)="sendMessage()">Send</button>
 </div>
-<h2>Group 1</h2>
+<mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection">
+  @for (group of availableGroups; track group; let index = $index) {
+  <mat-chip-option [color]=chipColor matBadge="{{unreadMessageCount[index]}}" [matBadgeHidden]=hidden[index] (click)="changeGroup(group)">{{group}}</mat-chip-option>
+  } @empty {
+  Start a new chat
+  }
+</mat-chip-listbox>
+
+<h2>{{group}}</h2>
+<h4>Messsages</h4>
 <div>
-  <h2>Received Messages:</h2>
-  <div *ngFor="let receivedMessage of receivedMessages">{{ receivedMessage }}
-  </div>
-  <h2>Sent messages:</h2>
-  <div *ngFor="let sentMessage of sentMessages">{{ sentMessage }}
-  </div>
+
 </div>
-<h2>Group 2</h2>
-<div>
-  <h2>Received Messages:</h2>
-  <div *ngFor="let receivedMessage of receivedMessages2">{{ receivedMessage }}
-  </div>
-  <h2>Sent messages:</h2>
-  <div *ngFor="let sentMessage of sentMessages2">{{ sentMessage }}
-  </div>
+<div class="chat-container">
+  @for (message of receivedMessages[groupIndex]; track message) {
+    @if (message.senderName == 'user1') {
+      <div class="div-chat-sender" tooltip="matTooltip"
+           matTooltip="Sent: 2024.01.01" [matTooltipPosition]="chatPosition">{{message.senderName}}: {{message.text}}</div>
+    }
+    @else {
+      <div>{{message.senderName}} {{message.text}}</div>
+    }
+  } @empty {
+    This chat is currently empty
+  }
 </div>
+
